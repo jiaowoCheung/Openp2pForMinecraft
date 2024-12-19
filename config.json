@@ -1,0 +1,15 @@
+{
+    "LogLevel": 1,
+    "network": {
+        "TCPPort": 50448,
+        "UDPPort2": 27183,
+        "UDPPort1": 27182,
+        "ServerPort": 27183,
+        "ServerHost": "api.openp2p.cn",
+        "ShareBandwidth": 10,
+        "User": "gldoffice",
+        "Node": "a9c228c8-d632-45bb-8666-1626c140fc85",
+        "Token": 11602319472897248650
+    },
+    "apps": []
+}
