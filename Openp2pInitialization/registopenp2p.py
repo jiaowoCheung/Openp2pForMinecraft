@@ -1,32 +1,32 @@
 import requests
-
-# 定义注册账号和获取token的函数
+import random
+import string
+def generate_random_string(length):
+    # 生成随机字符串
+    letters = string.ascii_letters + string.digits
+    return ''.join(random.choice(letters) for i in range(length))
+# 注册账号
 def register_openp2p():
     # 访问注册页面
     register_url = 'https://console.openp2p.cn/register'
-    response = requests.get(register_url)
+    # payload = {'username': 'userName', 'password': 'passWord', 'confirmPassword':'confirmPassword','phone': 'phoneNumber','email': 'emailNumber'}
     
-    # 如果需要，可以在这里添加表单数据进行POST请求，模拟注册过程
-    # 例如：
-    payload = {'username': 'userName', 'password': 'passWord', 'confirmPassword':'confirmPassword','phone': 'phoneNumber','email': 'emailNumber'}
+    payload = {
+        'username': generate_random_string(10),  # 生成10个字符的随机用户名
+        'password': generate_random_string(10),  # 生成10个字符的随机密码
+        'confirmPassword': generate_random_string(10),  # 确认密码
+        'phone': '1' + generate_random_string(10),  # 生成11位随机电话号码
+        'email': generate_random_string(10) + '@coolge.com'  # 生成随机电子邮箱
+    }
+    
     response = requests.post(register_url, data=payload)
     
-    # 检查是否注册成功，并获取token
+     # 检查响应状态码
     if response.status_code == 200:
-        # 这里需要根据实际页面结构进行调整，以下仅为示例
-        token_url = 'https://console.openp2p.cn/your/token/path'
-        token_response = requests.get(token_url)
-        if token_response.status_code == 200:
-            token = token_response.json().get('token')
-            return token
-        else:
-            print("获取Token失败。")
+        print("注册请求已发送，等待服务器响应。")
     else:
-        print("注册失败。")
+        print(f"注册请求失败，状态码：{response.status_code}")
+
 
 # 调用函数
-token = register_openp2p()
-if token:
-    print(f"注册成功，获取的Token为：{token}")
-else:
-    print("注册或获取Token失败。")
+register_openp2p()
